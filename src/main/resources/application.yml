@@ -14,11 +14,6 @@ spring:
       max-file-size:
           20MB 
           
-#swagger 설정(boot 2.6 이후에마나 추가)
-  mvc:
-    pathmatch:
-      matching-strategy: ant-path-matcher
-          
 #mybatis
 mybatis:
   type-aliases-package: data.dto
