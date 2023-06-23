@@ -11,11 +11,14 @@
 	<select id="getAllMembers" resultType="MemberDto">
 		select * from member order by myid
 	</select>
+	<select id="getLogin" parameterType="Map" resultType="int">
+		select count(*) from member where myid=#{myid} and mypass=#{mypass}
+	</select>
 	<select id="getName" parameterType="String" resultType="String">
 		select myname from member where myid=#{myid}
 	</select>
 	<delete id="deleteMember" parameterType="int">
-		delete from member where num=#{num}0
+		delete from member where num=#{num}
 	</delete>
 	
 </mapper>
