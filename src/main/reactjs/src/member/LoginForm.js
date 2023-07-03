@@ -7,24 +7,47 @@ function LoginForm(props) {
     const [mypass,setMypass]=useState('');
     const navi=useNavigate();
     
-    //submit 이벤트
+    // //submit 이벤트
+    // const onSubmitLogin=(e)=>{
+    //     e.preventDefault();
+    //     const url=`/member/login?myid=${myid}&mypass=${mypass}`;
+    //     axios.get(url)
+    //     .then(res=>{
+    //         if(res.data.success==='yes'){
+    //             sessionStorage.loginok="yes";
+    //             sessionStorage.myname=res.data.myname;
+    //             sessionStorage.myid=myid;
+    //             navi("/")
+    //             window.location.reload();
+    //         }else{
+    //             alert("아이디나 비밀번호가 맞지 않습니다");
+    //             sessionStorage.loginok="no";
+    //             sessionStorage.myname="";
+    //             sessionStorage.myid="";
+           
+    //         }
+    //     })
+    // }
+
     const onSubmitLogin=(e)=>{
         e.preventDefault();
-        const url=`/member/login?myid=${myid}&mypass=${mypass}`;
+        const url= `/member/login?myid=$={myid}&mypass=${mypass}`;
         axios.get(url)
         .then(res=>{
             if(res.data.success==='yes'){
-                sessionStorage.loginok="yes";
+            
+                sessionStorage.token=res.data.token;
+                console.log("res.data.token="+res.data.token);
+                //sessionStorage.loginok="yes";
                 sessionStorage.myname=res.data.myname;
                 sessionStorage.myid=myid;
-                navi("/")
-                window.location.reload();
+                navi("/");
+                window.location.reload();//새로고침 
             }else{
                 alert("아이디나 비밀번호가 맞지 않습니다");
-                sessionStorage.loginok="no";
+                //sessionStorage.loginok="no";
                 sessionStorage.myname="";
-                sessionStorage.myid="";
-           
+                sessionStorage.myid="";       
             }
         })
     }

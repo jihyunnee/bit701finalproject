@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import data.dto.MemberDto;
 import data.service.MemberService;
+import jwt.setting.JwtTokenProvider;
 import lombok.AllArgsConstructor;
 
 @RequestMapping("/member")
@@ -61,6 +63,12 @@ public class MemberController {
 		String myname="";
 		if(n==1) {
 			myname=memberService.getName(myid);
+			
+			Authentication authentication = new UserAuthentication(myid, null, null);
+			String token = JwtTokenProvider.generateToken(authentication, myid);
+			System.out.println("token=");
+			map.put("token",token);
+			
 			
 		}
 		Map<String, String> map=new HashMap<>();
